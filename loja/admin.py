@@ -2,11 +2,11 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Ginasio 
+from .models import Loja
 
-class GinasioAdmin(admin.ModelAdmin):
+class LojaAdmin(admin.ModelAdmin):
     list_display = ("nome", "idade",)
     ordering = ("nome", "idade",)
     serach_field = ("nome",)
 
-admin.site.register(Ginasio, GinasioAdmin)
+admin.site.register(Loja, LojaAdmin)

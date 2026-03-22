@@ -2,11 +2,11 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Ginasio 
+from .models import Receita
 
-class GinasioAdmin(admin.ModelAdmin):
+class ReceitaAdmin(admin.ModelAdmin):
     list_display = ("nome", "idade",)
     ordering = ("nome", "idade",)
     serach_field = ("nome",)
 
-admin.site.register(Ginasio, GinasioAdmin)
+admin.site.register(receita, ReceitaAdmin)
