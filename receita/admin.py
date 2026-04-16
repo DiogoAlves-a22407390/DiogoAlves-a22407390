@@ -9,4 +9,4 @@ class ReceitaAdmin(admin.ModelAdmin):
     ordering = ("nome", "idade",)
     serach_field = ("nome",)
 
-admin.site.register(receita, ReceitaAdmin)
+admin.site.register(Receita, ReceitaAdmin)
