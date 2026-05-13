@@ -1,0 +1,43 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2>Unidades Curriculares</h2>
+<section>
+    {% for uc in ucs %}
+    <article>
+        <header>
+            <h3>{{ uc.nome }}</h3>
+            <p>{{ uc.descricao }}</p>
+        </header>
+        <section>
+            <h4>Professores</h4>
+            <ul>
+                {% for prof in uc.professores.all %}
+                <li>{{ prof.nome }}</li>
+                {% empty %}
+                <li style="background:#6b7280;">Sem professores</li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section>
+            <h4>Projetos</h4>
+            <ul>
+                {% for proj in uc.projetos.all %}
+                <li>{{ proj.titulo }}</li>
+                {% empty %}
+                <li style="background:#6b7280;">Sem projetos</li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section>
+            <h4>Detalhes</h4>
+            <ul>
+                <li>Créditos: {{ uc.creditos }} ECTS</li>
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <p>Nenhuma unidade curricular encontrada.</p>
+    {% endfor %}
+</section>
+{% endblock %}

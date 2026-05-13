@@ -1,0 +1,26 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2>TFCs</h2>
+<section>
+    {% for tfc in tfcs %}
+    <article>
+        <header>
+            <h3>{{ tfc.titulo }}</h3>
+            <p>{{ tfc.descricao }}</p>
+        </header>
+        <section>
+            <h4>Informação</h4>
+            <ul>
+                <li>Autor: {{ tfc.autor.nome }}</li>
+                <li>Orientador: {{ tfc.orientador.nome }}</li>
+                <li>Ano: {{ tfc.ano }}</li>
+                <li>Tema: {{ tfc.tema }}</li>
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <p>Nenhum TFC encontrado.</p>
+    {% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2>Professores</h2>
+<section>
+    {% for professor in professores %}
+    <article>
+        <header>
+            <h3>{{ professor.nome }}</h3>
+        </header>
+        <section>
+            <h4>Unidades Curriculares</h4>
+            <ul>
+                {% for uc in professor.unidades_curriculares.all %}
+                <li>{{ uc.nome }}</li>
+                {% empty %}
+                <li style="background:#6b7280;">Sem UCs atribuídas</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <p>Nenhum professor encontrado.</p>
+    {% endfor %}
+</section>
+{% endblock %}

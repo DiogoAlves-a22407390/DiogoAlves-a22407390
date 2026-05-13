@@ -1,0 +1,24 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2>Licenciaturas</h2>
+<section>
+    {% for lic in licenciaturas %}
+    <article>
+        <header>
+            <h3>{{ lic.nome }}</h3>
+            <p>{{ lic.informacao }}</p>
+        </header>
+        <section>
+            <h4>Detalhes</h4>
+            <ul>
+                <li>Duração: {{ lic.duracao }} anos</li>
+                <li>Créditos: {{ lic.creditos }} ECTS</li>
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <p>Nenhuma licenciatura encontrada.</p>
+    {% endfor %}
+</section>
+{% endblock %}

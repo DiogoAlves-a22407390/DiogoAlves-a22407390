@@ -1,0 +1,27 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2>Formações</h2>
+<section>
+    {% for formacao in formacoes %}
+    <article>
+        <header>
+            <h3>{{ formacao.titulo }}</h3>
+            <p>{{ formacao.descricao }}</p>
+        </header>
+        <section>
+            <h4>Detalhes</h4>
+            <ul>
+                <li>Tipo: {{ formacao.tipo }}</li>
+                <li>Instituição: {{ formacao.instituicao }}</li>
+                <li>Início: {{ formacao.data_inicio }}</li>
+                <li>Conclusão: {{ formacao.data_conclusao }}</li>
+                <li>Aluno: {{ formacao.aluno.nome }}</li>
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <p>Nenhuma formação encontrada.</p>
+    {% endfor %}
+</section>
+{% endblock %}

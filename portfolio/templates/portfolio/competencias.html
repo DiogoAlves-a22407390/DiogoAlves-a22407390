@@ -1,0 +1,34 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2>Competências</h2>
+<section>
+    {% for comp in competencias %}
+    <article>
+        <header>
+            <h3>{{ comp.nome }}</h3>
+            <p>Tipo: {{ comp.tipo }}</p>
+        </header>
+        <section>
+            <h4>Níveis</h4>
+            <ul>
+                <li>Nível: {{ comp.nivel }}/10</li>
+                <li>Experiência: {{ comp.experiencia }}/5</li>
+            </ul>
+        </section>
+        <section>
+            <h4>Projetos relacionados</h4>
+            <ul>
+                {% for proj in comp.projetos.all %}
+                <li>{{ proj.titulo }}</li>
+                {% empty %}
+                <li style="background:#6b7280;">Sem projetos</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <p>Nenhuma competência encontrada.</p>
+    {% endfor %}
+</section>
+{% endblock %}

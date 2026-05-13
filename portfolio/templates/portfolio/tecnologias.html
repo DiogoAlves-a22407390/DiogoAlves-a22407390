@@ -1,0 +1,25 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2>Tecnologias</h2>
+<section>
+    {% for tec in tecnologias %}
+    <article>
+        <header>
+            <h3>{{ tec.nome }}</h3>
+            <p>{{ tec.descricao }}</p>
+        </header>
+        <section>
+            <h4>Detalhes</h4>
+            <ul>
+                <li>Tipo: {{ tec.tipo }}</li>
+                <li>Interesse: {{ tec.interesse }}/10</li>
+                <li><a href="{{ tec.site }}" target="_blank" style="color:white;text-decoration:none;">🔗 Website</a></li>
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <p>Nenhuma tecnologia encontrada.</p>
+    {% endfor %}
+</section>
+{% endblock %}
