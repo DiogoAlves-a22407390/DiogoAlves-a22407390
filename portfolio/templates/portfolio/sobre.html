@@ -1,0 +1,276 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+{% load markdownify %}
+<h2>Sobre esta Aplicação</h2>
+
+<!-- 1. ARQUITETURA MVT -->
+<section>
+    <article>
+        <header>
+            <h3>1. Arquitetura MVT do Django</h3>
+            <p>O Django segue o padrão <strong>Model — View — Template</strong>.</p>
+        </header>
+
+        <section>
+            <h4>Diagrama (desenho em papel)</h4>
+            <div class="placeholder">
+                <p>📸 Insere aqui a fotografia do teu desenho</p>
+            </div>
+        </section>
+
+        <section>
+            <h4>Componentes</h4>
+            <ul>
+                <li><strong>Model</strong> — define a estrutura dos dados e comunica com a base de dados via ORM.</li>
+                <li><strong>View</strong> — recebe pedidos HTTP, processa dados e devolve uma resposta.</li>
+                <li><strong>Template</strong> — ficheiros HTML que renderizam os dados dinamicamente.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h4>Fluxo de informação</h4>
+            <ul>
+                <li>1. Browser faz um pedido HTTP para um URL.</li>
+                <li>2. O <code>urls.py</code> encaminha para a view correspondente.</li>
+                <li>3. A view consulta ou modifica dados via Model.</li>
+                <li>4. O Model comunica com a base de dados.</li>
+                <li>5. A view passa os dados ao template, que gera o HTML.</li>
+                <li>6. O HTML é devolvido ao browser.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h4>Vídeo-tutorial: Criar um novo projeto</h4>
+            <div class="placeholder">
+                <p>🎥 Insere aqui o iframe do teu vídeo quando estiver disponível</p>
+                <!--
+                <iframe width="100%" height="400"
+                    src="https://www.youtube.com/embed/SEU_VIDEO_ID"
+                    frameborder="0" allowfullscreen>
+                </iframe>
+                -->
+            </div>
+        </section>
+    </article>
+</section>
+
+<!-- 2. MODELAÇÃO -->
+<section>
+    <article>
+        <header>
+            <h3>2. Modelação</h3>
+        </header>
+
+        <section>
+            <h4>Diagrama Entidade-Relação</h4>
+            <div class="placeholder">
+                <p>📸 Insere aqui o teu diagrama ER</p>
+            </div>
+        </section>
+
+        <section>
+            <h4>models.py</h4>
+            <pre class="codigo"><code>class Licenciatura(models.Model):
+    nome = models.CharField(max_length=100)
+    duracao = models.IntegerField()
+    creditos = models.IntegerField()
+    informacao = models.CharField(max_length=250)
+
+class Aluno(models.Model):
+    nome = models.CharField(max_length=100)
+    numero = models.DecimalField(max_digits=8, decimal_places=0)
+    ano = models.IntegerField()
+    licenciatura = models.ForeignKey(Licenciatura, on_delete=models.CASCADE)
+
+class Professor(models.Model):
+    nome = models.CharField(max_length=100)
+    unidades_curriculares = models.ManyToManyField('UnidadeCurricular', blank=True)
+
+class Tecnologia(models.Model):
+    nome = models.CharField(max_length=100)
+    tipo = models.CharField(max_length=150)
+    descricao = models.CharField(max_length=200)
+    site = models.URLField()
+    interesse = models.IntegerField()
+
+class Projeto(models.Model):
+    titulo = models.CharField(max_length=100)
+    descricao = models.CharField(max_length=200)
+    data_de_realizacao = models.DateField()
+    tecnologias = models.ManyToManyField(Tecnologia)
+    link = models.URLField()
+
+class TFC(models.Model):
+    titulo = models.CharField(max_length=100)
+    descricao = models.CharField(max_length=200)
+    autor = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    orientador = models.ForeignKey(Professor, on_delete=models.CASCADE)
+    ano = models.IntegerField()
+    tema = models.CharField(max_length=100)
+
+class Competencia(models.Model):
+    nome = models.CharField(max_length=100)
+    tipo = models.CharField(max_length=100)
+    nivel = models.IntegerField()
+    experiencia = models.IntegerField()
+    projetos = models.ManyToManyField(Projeto)
+
+class Formacao(models.Model):
+    titulo = models.CharField(max_length=100)
+    tipo = models.CharField(max_length=100)
+    instituicao = models.CharField(max_length=150)
+    data_inicio = models.DateField()
+    data_conclusao = models.DateField()
+    descricao = models.CharField(max_length=200)
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+
+class MakingOF(models.Model):
+    tipo = models.CharField(max_length=100)
+    descricao = models.CharField(max_length=200)
+    justificacao = models.CharField(max_length=250)
+    solucao = models.CharField(max_length=150)
+    uso_ia = models.BooleanField()
+    descricao_uso_ia = models.CharField(max_length=250)</code></pre>
+        </section>
+    </article>
+</section>
+
+<!-- 3. TECNOLOGIAS -->
+<section>
+    <article>
+        <header>
+            <h3>3. Tecnologias Utilizadas</h3>
+        </header>
+
+        {% if tecnologias_por_tipo %}
+            {% for tipo, techs in tecnologias_por_tipo.items %}
+            <section>
+                <h4>{{ tipo }}</h4>
+                <ul>
+                    {% for tec in techs %}
+                    <li><a href="{{ tec.site }}" target="_blank" style="color:white;text-decoration:none;">{{ tec.nome }}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+            {% endfor %}
+        {% else %}
+        <section>
+            <h4>Backend</h4>
+            <ul>
+                <li>Django</li>
+                <li>Python</li>
+                <li>SQLite</li>
+            </ul>
+        </section>
+        <section>
+            <h4>Frontend</h4>
+            <ul>
+                <li>HTML5</li>
+                <li>CSS3</li>
+            </ul>
+        </section>
+        <section>
+            <h4>Outros</h4>
+            <ul>
+                <li>Git</li>
+                <li>GitHub</li>
+                <li>GitHub Codespaces</li>
+            </ul>
+        </section>
+        {% endif %}
+    </article>
+</section>
+
+<!-- 4. ESTRUTURA DE PÁGINAS -->
+<section>
+    <article>
+        <header>
+            <h3>4. Estrutura das Páginas</h3>
+        </header>
+        <section>
+            <h4>Mapa de Navegação</h4>
+            <div class="placeholder">
+                <p>📸 Insere aqui o teu mapa de navegação</p>
+            </div>
+            <ul style="margin-top:12px;">
+                <li>portfolio/ — Página inicial</li>
+                <li>portfolio/licenciaturas/</li>
+                <li>portfolio/alunos/</li>
+                <li>portfolio/professores/</li>
+                <li>portfolio/projetos/ — novo/ | &lt;id&gt;/editar/ | &lt;id&gt;/apagar/</li>
+                <li>portfolio/tecnologias/ — nova/ | &lt;id&gt;/editar/ | &lt;id&gt;/apagar/</li>
+                <li>portfolio/competencias/ — nova/ | &lt;id&gt;/editar/ | &lt;id&gt;/apagar/</li>
+                <li>portfolio/formacoes/ — nova/ | &lt;id&gt;/editar/ | &lt;id&gt;/apagar/</li>
+                <li>portfolio/unidades-curriculares/</li>
+                <li>portfolio/tfcs/</li>
+                <li>portfolio/makingof/</li>
+                <li>portfolio/sobre/</li>
+            </ul>
+        </section>
+    </article>
+</section>
+
+<!-- 5. GITHUB -->
+<section>
+    <article>
+        <header>
+            <h3>5. Repositório GitHub</h3>
+        </header>
+        <section>
+            <h4>Link</h4>
+            <ul>
+                <li>
+                    <a href="https://github.com/SEU_USERNAME/SEU_REPO" target="_blank" style="color:white;text-decoration:none;">
+                        🔗 Ver repositório no GitHub
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h4>Como foi utilizado</h4>
+            <ul>
+                <li>Controlo de versões com commits regulares</li>
+                <li>Desenvolvimento em GitHub Codespaces</li>
+                <li>Histórico completo de alterações</li>
+                <li>Repositório público como portfólio</li>
+            </ul>
+        </section>
+    </article>
+</section>
+
+<!-- 6. MAKING OF -->
+<section>
+    <article>
+        <header>
+            <h3>6. Making Of</h3>
+            <p>Registo dos principais desafios e decisões de desenvolvimento.</p>
+        </header>
+        <section>
+            <h4>Registos</h4>
+            <ul>
+                {% for item in makingof %}
+                <div style="margin-bottom: 16px;">
+                    <strong>{{ item.tipo }}</strong>
+                    {{ item.descricao | markdownify }}
+                    {{ item.justificacao | markdownify }}
+                    {{ item.solucao | markdownify }}
+                    {% if item.uso_ia %}
+                    {{ item.descricao_uso_ia | markdownify }}
+                    {% endif %}
+                </div>
+                {% empty %}
+                <li style="background:#6b7280;">Ainda sem registos. Adiciona em <a href="{% url 'makingof' %}" style="color:white;">Making Of</a>.</li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section>
+            <h4>Ver detalhes</h4>
+            <ul>
+                <li><a href="{% url 'makingof' %}" style="color:white;text-decoration:none;">📋 Ver todos os registos</a></li>
+            </ul>
+        </section>
+    </article>
+</section>
+
+{% endblock %}

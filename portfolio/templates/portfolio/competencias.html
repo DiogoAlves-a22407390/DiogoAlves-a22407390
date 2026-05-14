@@ -2,6 +2,9 @@
 
 {% block content %}
 <h2>Competências</h2>
+<div class="page-actions">
+    <a href="{% url 'competencia_create' %}" class="btn btn-primary">+ Nova Competência</a>
+</div>
 <section>
     {% for comp in competencias %}
     <article>
@@ -26,6 +29,10 @@
                 {% endfor %}
             </ul>
         </section>
+        <div class="card-actions">
+            <a href="{% url 'competencia_edit' comp.id %}" class="btn btn-secondary">Editar</a>
+            <a href="{% url 'competencia_delete' comp.id %}" class="btn btn-danger">Apagar</a>
+        </div>
     </article>
     {% empty %}
     <p>Nenhuma competência encontrada.</p>

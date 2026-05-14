@@ -43,7 +43,21 @@ INSTALLED_APPS = [
     "receita",
     "loja",
     "portfolio",
+    'markdownify.apps.MarkdownifyConfig',
 ]
+
+MARKDOWNIFY = {
+    "default": {
+        "WHITELIST_TAGS": [
+            'a', 'abbr', 'acronym',
+            'strong', 'b',
+            'blockquote', 'em', 'i',
+            'ul', 'li', 'ol',
+            'p',
+            'h1', 'h2', 'h3', 'h4',
+        ]
+    }
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

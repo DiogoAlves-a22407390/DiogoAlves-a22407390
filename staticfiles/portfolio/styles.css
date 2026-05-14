@@ -204,36 +204,16 @@ footer {
     margin-top: 40px;
 }
 
-/* Adiciona no final do teu styles.css */
-
-/* Placeholder para imagens e vídeo */
-.placeholder {
-    background: #f3f4f6;
-    border: 2px dashed #d1d5db;
-    border-radius: 10px;
-    padding: 40px;
-    text-align: center;
-    color: #6b7280;
-    margin-top: 8px;
+.card-actions form {
+    display: inline;
+    margin: 0;
+    padding: 0;
 }
 
-/* Bloco de código */
-.codigo {
-    background: #1f2937;
-    color: #e5e7eb;
-    padding: 16px;
-    border-radius: 10px;
-    font-size: 13px;
-    line-height: 1.7;
-    overflow-x: auto;
-    margin-top: 8px;
-}
-
-/* Lista simples no sobre (não pills) */
-.sobre-lista li {
-    background: none;
-    color: #374151;
-    padding: 4px 0;
-    border-radius: 0;
+.card-actions .btn {
+    padding: 10px 20px;
     font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    vertical-align: middle;
 }

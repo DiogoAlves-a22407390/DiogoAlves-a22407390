@@ -1,0 +1,44 @@
+{% extends 'portfolio/base.html' %}
+{% load markdownify %}
+
+{% block content %}
+<h2>Making Of</h2>
+<section>
+    {% for item in makingof %}
+    <article>
+        <header>
+            <h3>{{ item.tipo }}</h3>
+        </header>
+        <section>
+            <h4>Descrição</h4>
+            <ul>
+                <li>{{ item.descricao | markdownify }}</li>
+            </ul>
+        </section>
+        <section>
+            <h4>Justificação</h4>
+            <ul>
+                <li>{{ item.justificacao | markdownify }}</li>
+            </ul>
+        </section>
+        <section>
+            <h4>Solução</h4>
+            <ul>
+                <li>{{ item.solucao | markdownify }}</li>
+            </ul>
+        </section>
+        <section>
+            <h4>Uso de IA</h4>
+            <ul>
+                <li>{% if item.uso_ia %}Sim{% else %}Não{% endif %}</li>
+                {% if item.uso_ia %}
+                <li>{{ item.descricao_uso_ia | markdownify }}</li>
+                {% endif %}
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <p>Nenhuma entrada encontrada.</p>
+    {% endfor %}
+</section>
+{% endblock %}

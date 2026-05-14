@@ -2,6 +2,9 @@
 
 {% block content %}
 <h2>Tecnologias</h2>
+<div class="page-actions">
+    <a href="{% url 'tecnologia_create' %}" class="btn btn-primary">+ Nova Tecnologia</a>
+</div>
 <section>
     {% for tec in tecnologias %}
     <article>
@@ -14,9 +17,16 @@
             <ul>
                 <li>Tipo: {{ tec.tipo }}</li>
                 <li>Interesse: {{ tec.interesse }}/10</li>
-                <li><a href="{{ tec.site }}" target="_blank" style="color:white;text-decoration:none;">🔗 Website</a></li>
+                <li><a href="{{ tec.site }}" target="_blank" style="color:white;text-decoration:none;">Website</a></li>
             </ul>
         </section>
+        <div class="card-actions">
+            <a href="{% url 'tecnologia_edit' tec.id %}" class="btn btn-secondary">Editar</a>
+            <form method="post" action="{% url 'tecnologia_delete' tec.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Apagar</button>
+            </form>
+        </div>
     </article>
     {% empty %}
     <p>Nenhuma tecnologia encontrada.</p>
