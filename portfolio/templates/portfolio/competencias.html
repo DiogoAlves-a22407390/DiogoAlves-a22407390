@@ -2,9 +2,13 @@
 
 {% block content %}
 <h2>Competências</h2>
+
+{% if gestor %}
 <div class="page-actions">
     <a href="{% url 'competencia_create' %}" class="btn btn-primary">+ Nova Competência</a>
 </div>
+{% endif %}
+
 <section>
     {% for comp in competencias %}
     <article>
@@ -29,10 +33,15 @@
                 {% endfor %}
             </ul>
         </section>
+        {% if gestor %}
         <div class="card-actions">
             <a href="{% url 'competencia_edit' comp.id %}" class="btn btn-secondary">Editar</a>
-            <a href="{% url 'competencia_delete' comp.id %}" class="btn btn-danger">Apagar</a>
+            <form method="post" action="{% url 'competencia_delete' comp.id %}" style="display:inline; margin:0;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Apagar</button>
+            </form>
         </div>
+        {% endif %}
     </article>
     {% empty %}
     <p>Nenhuma competência encontrada.</p>

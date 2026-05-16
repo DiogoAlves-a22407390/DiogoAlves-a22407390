@@ -140,7 +140,10 @@ def projeto_delete(request, id):
 
 def tecnologias_view(request):
     tecnologias = Tecnologia.objects.all()
-    return render(request, 'portfolio/tecnologias.html', {'tecnologias': tecnologias})
+    return render(request, 'portfolio/tecnologias.html', {
+        'tecnologias': tecnologias,
+        'gestor': is_gestor(request.user) if request.user.is_authenticated else False,
+    })
 
 
 def tecnologia_create(request):
@@ -256,3 +259,6 @@ def sobre_view(request):
         'tecnologias_por_tipo': tecnologias_por_tipo,
         'makingof': makingof,
     })
+
+def is_gestor(user):
+    return user.groups.filter(name='gestor-portfolio').exists()

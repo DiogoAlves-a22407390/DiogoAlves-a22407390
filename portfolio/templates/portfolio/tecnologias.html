@@ -1,10 +1,13 @@
 {% extends 'portfolio/base.html' %}
-
 {% block content %}
 <h2>Tecnologias</h2>
+
+{% if gestor %}
 <div class="page-actions">
     <a href="{% url 'tecnologia_create' %}" class="btn btn-primary">+ Nova Tecnologia</a>
 </div>
+{% endif %}
+
 <section>
     {% for tec in tecnologias %}
     <article>
@@ -20,6 +23,7 @@
                 <li><a href="{{ tec.site }}" target="_blank" style="color:white;text-decoration:none;">Website</a></li>
             </ul>
         </section>
+        {% if gestor %}
         <div class="card-actions">
             <a href="{% url 'tecnologia_edit' tec.id %}" class="btn btn-secondary">Editar</a>
             <form method="post" action="{% url 'tecnologia_delete' tec.id %}" style="display:inline;">
@@ -27,6 +31,7 @@
                 <button type="submit" class="btn btn-danger">Apagar</button>
             </form>
         </div>
+        {% endif %}
     </article>
     {% empty %}
     <p>Nenhuma tecnologia encontrada.</p>

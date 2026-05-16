@@ -2,9 +2,13 @@
 
 {% block content %}
 <h2>Formações</h2>
+
+{% if gestor %}
 <div class="page-actions">
     <a href="{% url 'formacao_create' %}" class="btn btn-primary">+ Nova Formação</a>
 </div>
+{% endif %}
+
 <section>
     {% for formacao in formacoes %}
     <article>
@@ -22,10 +26,15 @@
                 <li>Aluno: {{ formacao.aluno.nome }}</li>
             </ul>
         </section>
+        {% if gestor %}
         <div class="card-actions">
             <a href="{% url 'formacao_edit' formacao.id %}" class="btn btn-secondary">Editar</a>
-            <a href="{% url 'formacao_delete' formacao.id %}" class="btn btn-danger">Apagar</a>
+            <form method="post" action="{% url 'formacao_delete' formacao.id %}" style="display:inline; margin:0;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Apagar</button>
+            </form>
         </div>
+        {% endif %}
     </article>
     {% empty %}
     <p>Nenhuma formação encontrada.</p>

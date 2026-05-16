@@ -2,9 +2,13 @@
 
 {% block content %}
 <h2>Projetos</h2>
+
+{% if gestor %}
 <div class="page-actions">
     <a href="{% url 'projeto_create' %}" class="btn btn-primary">+ Novo Projeto</a>
 </div>
+{% endif %}
+
 <section>
     {% for projeto in projetos %}
     <article>
@@ -29,6 +33,7 @@
                 <li><a href="{{ projeto.link }}" target="_blank" style="color:white;text-decoration:none;">Ver projeto</a></li>
             </ul>
         </section>
+        {% if gestor %}
         <div class="card-actions">
             <a href="{% url 'projeto_edit' projeto.id %}" class="btn btn-secondary">Editar</a>
             <form method="post" action="{% url 'projeto_delete' projeto.id %}" style="display:inline; margin:0;">
@@ -36,6 +41,7 @@
                 <button type="submit" class="btn btn-danger">Apagar</button>
             </form>
         </div>
+        {% endif %}
     </article>
     {% empty %}
     <p>Nenhum projeto encontrado.</p>
