@@ -4,9 +4,8 @@ from django.contrib.auth.models import User
 
 
 class RegistoForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2']
-        widgets = {
-            'username': forms.TextInput(attrs={'placeholder': 'Nome de utilizador'}),
-        }
+        fields = ['username', 'email', 'password1', 'password2']

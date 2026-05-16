@@ -3,9 +3,11 @@
 {% block content %}
 <h2>Login</h2>
 <section>
+
+    <!-- Login normal -->
     <article style="max-width:400px;">
         <header>
-            <h3>Entrar na conta</h3>
+            <h3>Entrar com username e senha</h3>
         </header>
         <form method="post">
             {% csrf_token %}
@@ -28,5 +30,15 @@
             </div>
         </form>
     </article>
+
+    <!-- Magic Link -->
+    <article style="max-width:400px;">
+        <header>
+            <h3>Entrar com link mágico</h3>
+            <p>Insere o teu email e recebe um link de acesso direto, sem precisar de senha.</p>
+        </header>
+        <a href="{% url 'magic_link_request' %}" class="btn btn-primary">✉️ Enviar link mágico</a>
+    </article>
+
 </section>
 {% endblock %}

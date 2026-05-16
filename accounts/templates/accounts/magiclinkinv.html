@@ -1,0 +1,17 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2>Link inválido</h2>
+<section>
+    <article style="max-width:400px;">
+        <header>
+            <h3>❌ Link inválido ou já utilizado</h3>
+            <p>Este link já foi usado ou não é válido. Pede um novo link mágico.</p>
+        </header>
+        <div class="form-actions">
+            <a href="{% url 'magic_link_request' %}" class="btn btn-primary">Pedir novo link</a>
+            <a href="{% url 'login' %}" class="btn btn-secondary">Voltar ao login</a>
+        </div>
+    </article>
+</section>
+{% endblock %}

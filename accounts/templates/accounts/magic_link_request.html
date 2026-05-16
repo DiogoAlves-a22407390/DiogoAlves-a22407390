@@ -1,0 +1,35 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2>Link Mágico</h2>
+<section>
+    <article style="max-width:400px;">
+        <header>
+            <h3>Entrar com link mágico</h3>
+            <p>Insere o teu email e recebes um link para entrar diretamente, sem senha.</p>
+        </header>
+
+        {% if mensagem %}
+        <p style="color:#059669; font-weight:600; margin-bottom:16px;">✅ {{ mensagem }}</p>
+        {% endif %}
+
+        {% if erro %}
+        <p class="form-error" style="margin-bottom:16px;">❌ {{ erro }}</p>
+        {% endif %}
+
+        <!-- Usa GET como nos slides -->
+        <form method="get">
+            <div class="form-fields">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="o-teu-email@exemplo.com" required>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">✉️ Enviar link</button>
+                <a href="{% url 'login' %}" class="btn btn-secondary">Voltar</a>
+            </div>
+        </form>
+    </article>
+</section>
+{% endblock %}
