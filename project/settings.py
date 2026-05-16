@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "loja",
     "portfolio",
     'markdownify.apps.MarkdownifyConfig',
+    'accounts',
 ]
 
 MARKDOWNIFY = {
@@ -137,3 +138,5 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+LOGIN_URL = '/accounts/login/'

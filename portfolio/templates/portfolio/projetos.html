@@ -30,10 +30,10 @@
             </ul>
         </section>
         <div class="card-actions">
-            <a href="{% url 'projeto_edit' projeto.id %}" class="btn btn-secondary">✏️ Editar</a>
+            <a href="{% url 'projeto_edit' projeto.id %}" class="btn btn-secondary">Editar</a>
             <form method="post" action="{% url 'projeto_delete' projeto.id %}" style="display:inline; margin:0;">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-danger">🗑️ Apagar</button>
+                <button type="submit" class="btn btn-danger">Apagar</button>
             </form>
         </div>
     </article>

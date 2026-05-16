@@ -26,6 +26,7 @@ urlpatterns = [
     path("escola/", include("escola.urls")), 
     path("", include("portfolio.urls")), 
     path("portfolio/", include("portfolio.urls")), 
+    path('accounts/', include('accounts.urls')),
 ]
 
 # Serve ficheiros media em DEBUG
