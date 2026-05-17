@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "portfolio",
     'markdownify.apps.MarkdownifyConfig',
     'accounts',
+    'artigos',
 ]
 
 MARKDOWNIFY = {

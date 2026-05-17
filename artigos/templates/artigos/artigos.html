@@ -1,0 +1,59 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Artigos</h2>
+
+{% if is_autor %}
+<div class="page-actions">
+    <a href="{% url 'artigo_create' %}" class="btn btn-primary">+ Novo Artigo</a>
+</div>
+{% endif %}
+
+<section>
+    {% for artigo in artigos %}
+    <article>
+        <header>
+            <h3><a href="{% url 'artigo' artigo.id %}" style="color:inherit;text-decoration:none;">{{ artigo.titulo }}</a></h3>
+            <p>Por <strong>{{ artigo.autor.username }}</strong> — {{ artigo.data_criacao|date:"d M Y" }}</p>
+        </header>
+
+        {% if artigo.fotografia %}
+        <img src="{{ artigo.fotografia.url }}" alt="{{ artigo.titulo }}"
+             style="max-width:100%; border-radius:8px; margin:10px 0;">
+        {% endif %}
+
+        <section>
+            <h4>Resumo</h4>
+            <ul>
+                <li>{{ artigo.texto|truncatewords:30 }}</li>
+            </ul>
+        </section>
+
+        <section>
+            <h4>Informação</h4>
+            <ul>
+                <li>❤️ {{ artigo.total_likes }} gostos</li>
+                <li>💬 {{ artigo.comentarios.count }} comentários</li>
+                {% if artigo.link_externo %}
+                <li><a href="{{ artigo.link_externo }}" target="_blank" style="color:white;text-decoration:none;">🔗 Link externo</a></li>
+                {% endif %}
+            </ul>
+        </section>
+
+        <div class="card-actions">
+            <a href="{% url 'artigo' artigo.id %}" class="btn btn-primary">Ler mais</a>
+            {% if is_autor and request.user == artigo.autor or request.user.is_superuser %}
+            <a href="{% url 'artigo_edit' artigo.id %}" class="btn btn-secondary">✏️ Editar</a>
+            <form method="post" action="{% url 'artigo_delete' artigo.id %}" style="display:inline; margin:0;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">🗑️ Apagar</button>
+            </form>
+            {% endif %}
+        </div>
+    </article>
+    {% empty %}
+    <p>Ainda não há artigos publicados.</p>
+    {% endfor %}
+</section>
+{% endblock %}
