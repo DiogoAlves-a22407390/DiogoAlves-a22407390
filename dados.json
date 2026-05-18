@@ -1,0 +1,98 @@
+[
+    {
+        "model": "portfolio.licenciatura",
+        "pk": 1,
+        "fields": {
+            "nome": "Engenharia Informática",
+            "duracao": 3,
+            "creditos": 180,
+            "informacao": "Computadores"
+        }
+    },
+    {
+        "model": "portfolio.aluno",
+        "pk": 1,
+        "fields": {
+            "nome": "Diogo Alves",
+            "numero": "22407390",
+            "ano": 2,
+            "licenciatura": 1,
+            "formacao_texto": "12º Ano"
+        }
+    },
+    {
+        "model": "portfolio.aluno",
+        "pk": 2,
+        "fields": {
+            "nome": "Rafael Magalhães",
+            "numero": "22407372",
+            "ano": 2,
+            "licenciatura": 1,
+            "formacao_texto": "12º Ano"
+        }
+    },
+    {
+        "model": "portfolio.professor",
+        "pk": 1,
+        "fields": {
+            "nome": "Pedro Alves",
+            "unidades_curriculares": []
+        }
+    },
+    {
+        "model": "portfolio.professor",
+        "pk": 2,
+        "fields": {
+            "nome": "Lucio Struder",
+            "unidades_curriculares": []
+        }
+    },
+    {
+        "model": "portfolio.tecnologia",
+        "pk": 2,
+        "fields": {
+            "nome": "Python",
+            "tipo": "Linguagem de Alto Nivel",
+            "descricao": "Python é uma linguagem de programação de alto nível, interpretada, orientada a objetos e com tipagem dinâmica.",
+            "site": "https://www.python.org",
+            "interesse": 8
+        }
+    },
+    {
+        "model": "portfolio.tecnologia",
+        "pk": 3,
+        "fields": {
+            "nome": "Java",
+            "tipo": "Linguagem de Alto Nivel",
+            "descricao": "Java é uma das linguagens de programação e plataformas de desenvolvimento mais utilizadas do mundo.",
+            "site": "https://www.java.com/pt-br/",
+            "interesse": 10
+        }
+    },
+    {
+        "model": "portfolio.projeto",
+        "pk": 5,
+        "fields": {
+            "titulo": "Balões",
+            "descricao": "Balões",
+            "data_de_realizacao": "2026-05-19",
+            "link": "https://github.com/DiogoAlves06/Connect-4-Balloons-",
+            "tecnologias": [
+                3
+            ]
+        }
+    },
+    {
+        "model": "artigos.artigo",
+        "pk": 2,
+        "fields": {
+            "titulo": "teste",
+            "texto": "test",
+            "fotografia": "artigos/novo_abismo_nULZxtY.png.webp",
+            "link_externo": null,
+            "data_criacao": "2026-05-16T22:34:39.815Z",
+            "autor": 1,
+            "likes": []
+        }
+    }
+]

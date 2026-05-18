@@ -29,15 +29,15 @@ def artigo_view(request, id):
     comentarios = artigo.comentarios.order_by('-data_criacao')
     form_comentario = ComentarioForm()
 
-    # Submeter comentário
     if request.method == 'POST' and request.user.is_authenticated:
-        form_comentario = ComentarioForm(request.POST)
-        if form_comentario.is_valid():
-            comentario = form_comentario.save(commit=False)
-            comentario.artigo = artigo
-            comentario.autor = request.user
-            comentario.save()
-            return redirect('artigo', id=artigo.id)
+        if 'comentario' in request.POST:  # ← distingue o form de comentário
+            form_comentario = ComentarioForm(request.POST)
+            if form_comentario.is_valid():
+                comentario = form_comentario.save(commit=False)
+                comentario.artigo = artigo
+                comentario.autor = request.user
+                comentario.save()
+                return redirect('artigo', id=artigo.id)
 
     ja_gostou = request.user in artigo.likes.all() if request.user.is_authenticated else False
 
@@ -49,7 +49,7 @@ def artigo_view(request, id):
         'is_autor': is_autor(request.user),
         'e_meu': artigo.autor == request.user,
     })
-
+    
 
 # ---------- Like ----------
 

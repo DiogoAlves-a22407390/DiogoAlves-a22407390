@@ -1,28 +1,211 @@
 {% extends 'portfolio/base.html' %}
+{% load static %}
 
 {% block content %}
-<h2>Bem-vindo ao Portfólio</h2>
-<section>
-    <article>
-        <header>
-            <h3>Explore o portfólio</h3>
-            <p>Consulte toda a informação disponível através da navegação acima.</p>
-        </header>
-        <section>
-            <h4>Secções disponíveis</h4>
-            <ul>
-                <li><a href="{% url 'licenciaturas' %}" style="color:white;text-decoration:none;">Licenciaturas</a></li>
-                <li><a href="{% url 'alunos' %}" style="color:white;text-decoration:none;">Alunos</a></li>
-                <li><a href="{% url 'professores' %}" style="color:white;text-decoration:none;">Professores</a></li>
-                <li><a href="{% url 'tecnologias' %}" style="color:white;text-decoration:none;">Tecnologias</a></li>
-                <li><a href="{% url 'projetos' %}" style="color:white;text-decoration:none;">Projetos</a></li>
-                <li><a href="{% url 'unidades_curriculares' %}" style="color:white;text-decoration:none;">Unidades Curriculares</a></li>
-                <li><a href="{% url 'tfcs' %}" style="color:white;text-decoration:none;">TFCs</a></li>
-                <li><a href="{% url 'competencias' %}" style="color:white;text-decoration:none;">Competências</a></li>
-                <li><a href="{% url 'formacoes' %}" style="color:white;text-decoration:none;">Formações</a></li>
-                <li><a href="{% url 'makingof' %}" style="color:white;text-decoration:none;">Making Of</a></li>
-            </ul>
-        </section>
-    </article>
-</section>
+
+<div class="hero">
+    <div class="hero-text">
+        <p class="hero-greeting">Olá, sou</p>
+        <h1 class="hero-name">Diogo Alves</h1>
+        <p class="hero-sub">2º ano · Engenharia Informática · Universidade Lusófona</p>
+        <p class="hero-desc">
+            Apaixonado por tecnologia, videojogos e desafios físicos.
+            Este portfólio reúne os meus projetos, competências e percurso académico.
+        </p>
+        <div class="hero-tags">
+            <span>🎮 Videojogos</span>
+            <span>💪 Atividade Física</span>
+            <span>💻 Programação</span>
+        </div>
+    </div>
+</div>
+
+<div class="sections-grid">
+    <a href="{% url 'projetos' %}" class="section-card card-highlight">
+        <span class="card-icon">🚀</span>
+        <h3>Projetos</h3>
+        <p>Os meus trabalhos e desenvolvimentos</p>
+    </a>
+    <a href="{% url 'tecnologias' %}" class="section-card">
+        <span class="card-icon">⚙️</span>
+        <h3>Tecnologias</h3>
+        <p>Ferramentas e linguagens que uso</p>
+    </a>
+    <a href="{% url 'competencias' %}" class="section-card">
+        <span class="card-icon">🧠</span>
+        <h3>Competências</h3>
+        <p>O que sei fazer e o meu nível</p>
+    </a>
+    <a href="{% url 'formacoes' %}" class="section-card">
+        <span class="card-icon">🎓</span>
+        <h3>Formações</h3>
+        <p>Percurso académico e formações</p>
+    </a>
+    <a href="{% url 'licenciaturas' %}" class="section-card">
+        <span class="card-icon">📚</span>
+        <h3>Licenciaturas</h3>
+        <p>Cursos e programas académicos</p>
+    </a>
+    <a href="{% url 'alunos' %}" class="section-card">
+        <span class="card-icon">👥</span>
+        <h3>Alunos</h3>
+        <p>Colegas e participantes</p>
+    </a>
+    <a href="{% url 'professores' %}" class="section-card">
+        <span class="card-icon">👨‍🏫</span>
+        <h3>Professores</h3>
+        <p>Docentes e orientadores</p>
+    </a>
+    <a href="{% url 'unidades_curriculares' %}" class="section-card">
+        <span class="card-icon">📖</span>
+        <h3>Unidades Curriculares</h3>
+        <p>Disciplinas do curso</p>
+    </a>
+    <a href="{% url 'tfcs' %}" class="section-card">
+        <span class="card-icon">📝</span>
+        <h3>TFCs</h3>
+        <p>Trabalhos finais de curso</p>
+    </a>
+    <a href="{% url 'makingof' %}" class="section-card">
+        <span class="card-icon">🎬</span>
+        <h3>Making Of</h3>
+        <p>Desafios e decisões de desenvolvimento</p>
+    </a>
+</div>
+
+<style>
+/* HERO */
+.hero {
+    background: #1f2937;
+    border-radius: 20px;
+    padding: 48px 40px;
+    margin-bottom: 36px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 300px;
+    height: 300px;
+    background: rgba(37, 99, 235, 0.15);
+    border-radius: 50%;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    left: 30%;
+    width: 200px;
+    height: 200px;
+    background: rgba(37, 99, 235, 0.08);
+    border-radius: 50%;
+}
+
+.hero-greeting {
+    font-size: 16px;
+    color: #9ca3af;
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.hero-name {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+}
+
+.hero-sub {
+    font-size: 16px;
+    color: #2563eb;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.hero-desc {
+    font-size: 15px;
+    color: #d1d5db;
+    max-width: 500px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+.hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.hero-tags span {
+    background: rgba(37, 99, 235, 0.2);
+    border: 1px solid rgba(37, 99, 235, 0.4);
+    color: #93c5fd;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* GRID DE SECÇÕES */
+.sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.section-card {
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 14px;
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.section-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    border-color: #2563eb;
+}
+
+.section-card.card-highlight {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+}
+
+.section-card.card-highlight p {
+    color: #bfdbfe;
+}
+
+.card-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.section-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.section-card p {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 0;
+    line-height: 1.4;
+}
+</style>
+
 {% endblock %}
