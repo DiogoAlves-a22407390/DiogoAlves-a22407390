@@ -385,3 +385,37 @@ footer {
     margin: 0;
     line-height: 1.4;
 }
+
+/* =====================
+   ARTIGO DETALHE
+   ===================== */
+
+.artigo-img {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 12px;
+}
+
+.artigo-texto {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #374151;
+    white-space: pre-line;
+}
+
+.comentario {
+    padding: 14px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.comentario:last-child {
+    border-bottom: none;
+}
+
+.comentario-info {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 6px;
+}

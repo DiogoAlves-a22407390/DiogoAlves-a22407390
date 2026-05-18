@@ -44,10 +44,10 @@
         <div class="card-actions">
             <a href="{% url 'artigo' artigo.id %}" class="btn btn-primary">Ler mais</a>
             {% if is_autor and request.user == artigo.autor or request.user.is_superuser %}
-            <a href="{% url 'artigo_edit' artigo.id %}" class="btn btn-secondary">✏️ Editar</a>
+            <a href="{% url 'artigo_edit' artigo.id %}" class="btn btn-secondary">Editar</a>
             <form method="post" action="{% url 'artigo_delete' artigo.id %}" style="display:inline; margin:0;">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-danger">🗑️ Apagar</button>
+                <button type="submit" class="btn btn-danger">Apagar</button>
             </form>
             {% endif %}
         </div>

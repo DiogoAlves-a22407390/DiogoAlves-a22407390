@@ -1,59 +1,201 @@
 {% extends 'portfolio/base.html' %}
-{% load static %}
 
 {% block content %}
-<h2>Artigos</h2>
-
-{% if is_autor %}
-<div class="page-actions">
-    <a href="{% url 'artigo_create' %}" class="btn btn-primary">+ Novo Artigo</a>
-</div>
-{% endif %}
 
 <section>
-    {% for artigo in artigos %}
+
     <article>
+
         <header>
-            <h3><a href="{% url 'artigo' artigo.id %}" style="color:inherit;text-decoration:none;">{{ artigo.titulo }}</a></h3>
-            <p>Por <strong>{{ artigo.autor.username }}</strong> — {{ artigo.data_criacao|date:"d M Y" }}</p>
+            <h2>{{ artigo.titulo }}</h2>
+
+            <p>
+                Por <strong>{{ artigo.autor.username }}</strong>
+                — {{ artigo.data_criacao|date:"d M Y H:i" }}
+            </p>
         </header>
 
         {% if artigo.fotografia %}
-        <img src="{{ artigo.fotografia.url }}" alt="{{ artigo.titulo }}"
-             style="max-width:100%; border-radius:8px; margin:10px 0;">
+        <div style="text-align:center; margin:14px 0;">
+
+            <img src="{{ artigo.fotografia.url }}" alt="{{ artigo.titulo }}" style="
+                max-width:100%;
+                max-height:500px;
+                width:auto;
+                height:auto;
+                border-radius:12px;
+                display:block;
+                margin:auto;
+            ">
+
+        </div>
         {% endif %}
 
         <section>
-            <h4>Resumo</h4>
-            <ul>
-                <li>{{ artigo.texto|truncatewords:30 }}</li>
-            </ul>
+            <h4>Conteúdo</h4>
+
+            <p class="artigo-texto">
+                {{ artigo.texto }}
+            </p>
         </section>
 
+        {% if artigo.link_externo %}
         <section>
-            <h4>Informação</h4>
+            <h4>Link externo</h4>
+
+            <ul>
+                <li>
+                    <a href="{{ artigo.link_externo }}" target="_blank" style="color:white;text-decoration:none;">
+                        Abrir link
+                    </a>
+                </li>
+            </ul>
+        </section>
+        {% endif %}
+
+        <section>
+            <h4>Interações</h4>
+
             <ul>
                 <li>❤️ {{ artigo.total_likes }} gostos</li>
-                <li>💬 {{ artigo.comentarios.count }} comentários</li>
-                {% if artigo.link_externo %}
-                <li><a href="{{ artigo.link_externo }}" target="_blank" style="color:white;text-decoration:none;">🔗 Link externo</a></li>
-                {% endif %}
+                <li>💬 {{ comentarios.count }} comentários</li>
             </ul>
         </section>
 
         <div class="card-actions">
-            <a href="{% url 'artigo' artigo.id %}" class="btn btn-primary">Ler mais</a>
-            {% if is_autor and request.user == artigo.autor or request.user.is_superuser %}
-            <a href="{% url 'artigo_edit' artigo.id %}" class="btn btn-secondary">✏️ Editar</a>
-            <form method="post" action="{% url 'artigo_delete' artigo.id %}" style="display:inline; margin:0;">
+
+            <form method="post" action="{% url 'like' artigo.id %}">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-danger">🗑️ Apagar</button>
+
+                <button type="submit" class="btn btn-primary">
+
+                    {% if ja_gostou %}
+                    ❤️ Remover gosto
+                    {% else %}
+                    🤍 Gostar
+                    {% endif %}
+
+                </button>
             </form>
+
+            {% if e_meu or request.user.is_superuser %}
+            <a href="{% url 'artigo_edit' artigo.id %}" class="btn btn-secondary">
+                Editar
+            </a>
             {% endif %}
+
         </div>
+
     </article>
-    {% empty %}
-    <p>Ainda não há artigos publicados.</p>
-    {% endfor %}
+
 </section>
+
+<!-- COMENTÁRIOS -->
+
+<section>
+
+    <article>
+
+        <header>
+            <h3>Comentários</h3>
+        </header>
+
+        {% for comentario in comentarios %}
+
+        <div class="comentario">
+
+            <p class="comentario-info">
+
+                <strong>
+                    {{ comentario.autor.username }}
+                </strong>
+
+                — {{ comentario.data_criacao|date:"d M Y H:i" }}
+
+            </p>
+
+            <p>
+                {{ comentario.texto }}
+            </p>
+
+        </div>
+
+        {% empty %}
+
+        <p>
+            Ainda não existem comentários.
+        </p>
+
+        {% endfor %}
+
+    </article>
+
+</section>
+
+<!-- FORM COMENTÁRIO -->
+
+{% if request.user.is_authenticated %}
+
+<section>
+
+    <article>
+
+        <header>
+            <h3>Adicionar comentário</h3>
+        </header>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            <input type="hidden" name="comentario" value="1">
+
+            <div class="form-fields">
+
+                {% for field in form_comentario %}
+
+                <div class="form-group">
+
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            <div class="form-actions">
+
+                <button type="submit" class="btn btn-primary">
+                    💬 Comentar
+                </button>
+
+            </div>
+
+        </form>
+
+    </article>
+
+</section>
+
+{% else %}
+
+<section>
+
+    <article>
+
+        <p>
+            Tens de iniciar sessão para comentar.
+        </p>
+
+    </article>
+
+</section>
+
+{% endif %}
+
 {% endblock %}
