@@ -1,6 +1,7 @@
 {% extends 'portfolio/base.html' %}
 
 {% block content %}
+{% load static %}
 {% load markdownify %}
 <h2>Sobre esta Aplicação</h2>
 
@@ -65,7 +66,7 @@
         <section>
             <h4>Diagrama Entidade-Relação</h4>
             <div class="placeholder">
-                <p>📸 Insere aqui o teu diagrama ER</p>
+                <img src="{% static 'portfolio/modelacao.png' %}" alt="Diagrama Entidade-Relação" style="max-width:100%; height:auto;">
             </div>
         </section>
 
@@ -221,8 +222,8 @@ class MakingOF(models.Model):
             <h4>Link</h4>
             <ul>
                 <li>
-                    <a href="https://github.com/SEU_USERNAME/SEU_REPO" target="_blank" style="color:white;text-decoration:none;">
-                        🔗 Ver repositório no GitHub
+                    <a href="https://github.com/DiogoAlves-a22407390" target="_blank" style="color:white;text-decoration:none;">
+                        Ver repositório no GitHub
                     </a>
                 </li>
             </ul>
